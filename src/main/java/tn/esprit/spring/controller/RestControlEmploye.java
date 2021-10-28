@@ -21,7 +21,6 @@ import tn.esprit.spring.entities.Timesheet;
 import tn.esprit.spring.services.IEmployeService;
 import tn.esprit.spring.services.IEntrepriseService;
 import tn.esprit.spring.services.ITimesheetService;
-import org.apache.log4j.Logger;
 
 @RestController
 public class RestControlEmploye {
@@ -33,22 +32,15 @@ public class RestControlEmploye {
 	@Autowired
 	ITimesheetService itimesheetservice;
 
-	// loger Moetaz Brayek
-	private static Logger logger = Logger.getLogger(RestControlEmploye.class);
-
-
+	
 	// http://localhost:8081/SpringMVC/servlet/ajouterEmployer
 	//{"id":1,"nom":"kallel", "prenom":"khaled", "email":"Khaled.kallel@ssiiconsulting.tn", "isActif":true, "role":"INGENIEUR"}
 	
 	@PostMapping("/ajouterEmployer")
 	@ResponseBody
 	public Employe ajouterEmploye(@RequestBody Employe employe)
-	{	    
-		logger.info("\n----------Moetaz Brayek----------\n");
-	    logger.info("\n Trying to add employe! \n");
-		logger.info("\n--------------------\n");
-
-		iemployeservice.ajouterEmploye(employe);
+	{
+		iemployeservice.addOrUpdateEmploye(employe);
 		return employe;
 	}
 	
