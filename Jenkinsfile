@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        app = docker.build("anisell/dev")
+        app = docker.build("sadekselmi/devops")
     }
 
     stage('Test image') {
@@ -24,14 +24,14 @@ node {
         /* 
 			You would need to first register with DockerHub before you can push images to your account
 		*/
-        docker.withRegistry('https://registry.hub.docker.com', 'anisell') {
+        docker.withRegistry('https://registry.hub.docker.com', 'sadekselmi') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
     stage('Email Notification') {
-	    mail bcc: '', body: '''Hello Anis, this is a Jenkins Pipeline alert for launching Cycle
+	    mail bcc: '', body: '''Hello Sadek, this is a Jenkins Pipeline alert for launching Cycle
 
-            Thank you''', cc: '', from: '', replyTo: '', subject: 'Jenking Job Launched', to: 'anis.ellouz1@esprit.tn'
+            Thank you''', cc: '', from: '', replyTo: '', subject: 'Jenking Job Launched', to: 'sadek.selmi@esprit.tn'
     }}
