@@ -15,38 +15,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Employe;
-import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Timesheet;
 import tn.esprit.spring.services.IEmployeService;
-import tn.esprit.spring.services.IEntrepriseService;
 import tn.esprit.spring.services.ITimesheetService;
-import org.apache.log4j.Logger;
 
 @RestController
 public class RestControlEmploye {
 
+	
 	@Autowired
 	IEmployeService iemployeservice;
 	@Autowired
-	IEntrepriseService ientrepriseservice;
-	@Autowired
 	ITimesheetService itimesheetservice;
 
-	// loger Moetaz Brayek
-	private static Logger logger = Logger.getLogger(RestControlEmploye.class);
-
-
+	
 	// http://localhost:8081/SpringMVC/servlet/ajouterEmployer
+	//{"id":1,"nom":"kallel", "prenom":"khaled", "email":"Khaled.kallel@ssiiconsulting.tn", "isActif":true, "role":"INGENIEUR"}
 	
 	@PostMapping("/ajouterEmployer")
 	@ResponseBody
 	public Employe ajouterEmploye(@RequestBody Employe employe)
-	{	    
-		logger.info("\n----------Moetaz Brayek----------\n");
-	    logger.info("\n Trying to add employe! \n");
-		logger.info("\n--------------------\n");
-
+	{
 		iemployeservice.ajouterEmploye(employe);
 		return employe;
 	}
@@ -73,13 +63,14 @@ public class RestControlEmploye {
 	}
 
 	// http://localhost:8081/SpringMVC/servlet/ajouterContrat
+	//{"reference":6,"dateDebut":"2020-03-01","salaire":2000,"typeContrat":"CDD"}
 	@PostMapping("/ajouterContrat")
 	@ResponseBody
 	public int ajouterContrat(@RequestBody Contrat contrat) {
 		iemployeservice.ajouterContrat(contrat);
 		return contrat.getReference();
 	}
-	
+
 	// http://localhost:8081/SpringMVC/servlet/affecterContratAEmploye/6/1
    @PutMapping(value = "/affecterContratAEmploye/{idcontrat}/{idemp}") 
 	public void affecterContratAEmploye(@PathVariable("idcontrat")int contratId, @PathVariable("idemp")int employeId)
@@ -111,7 +102,6 @@ public class RestControlEmploye {
 		iemployeservice.deleteContratById(contratId);
 	}
 
-    
     // URL : http://localhost:8081/SpringMVC/servlet/getNombreEmployeJPQL
     @GetMapping(value = "getNombreEmployeJPQL")
     @ResponseBody
@@ -129,12 +119,7 @@ public class RestControlEmploye {
 	}
 
     // URL : http://localhost:8081/SpringMVC/servlet/getAllEmployeByEntreprise/1
-    @GetMapping(value = "getAllEmployeByEntreprise/{identreprise}")
-    @ResponseBody
-	public List<Employe> getAllEmployeByEntreprise(@PathVariable("identreprise") int identreprise) {
-    	Entreprise entreprise=ientrepriseservice.getEntrepriseById(identreprise);
-		return iemployeservice.getAllEmployeByEntreprise(entreprise);
-	}
+
 
  // Modifier email : http://localhost:8081/SpringMVC/servlet/mettreAjourEmailByEmployeIdJPQL/2/newemail
  	@PutMapping(value = "/mettreAjourEmailByEmployeIdJPQL/{id}/{newemail}") 
@@ -151,8 +136,10 @@ public class RestControlEmploye {
 		iemployeservice.deleteAllContratJPQL();
 		
 	}
-
-    // URL : http://localhost:8081/SpringMVC/servlet/getSalaireByEmployeIdJPQL/2
+    
+    
+    
+ // URL : http://localhost:8081/SpringMVC/servlet/getSalaireByEmployeIdJPQL/2
     @GetMapping(value = "getSalaireByEmployeIdJPQL/{idemp}")
     @ResponseBody
 	public float getSalaireByEmployeIdJPQL(@PathVariable("idemp")int employeId) {
@@ -167,6 +154,7 @@ public class RestControlEmploye {
 	}
 
 	
+	//TODO
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
 			Date dateFin) {
 		return iemployeservice.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
@@ -180,7 +168,7 @@ public class RestControlEmploye {
 		
 		return iemployeservice.getAllEmployes();
 	}
-
-	
-	
+    
+    
+    
 }

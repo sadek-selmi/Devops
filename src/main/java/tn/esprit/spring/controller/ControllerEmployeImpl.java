@@ -12,7 +12,6 @@ import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Timesheet;
 import tn.esprit.spring.services.IEmployeService;
-import tn.esprit.spring.services.IEntrepriseService;
 import tn.esprit.spring.services.ITimesheetService;
 
 
@@ -20,8 +19,6 @@ import tn.esprit.spring.services.ITimesheetService;
 public class ControllerEmployeImpl  {
 	@Autowired
 	IEmployeService iemployeservice;
-	@Autowired
-	IEntrepriseService ientrepriseservice;
 	@Autowired
 	ITimesheetService itimesheetservice;
 
