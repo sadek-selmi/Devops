@@ -17,7 +17,7 @@ import tn.esprit.spring.entities.Role;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = EmployeServiceImplTest.class)
 public class EmployeServiceImplTest {
 	
 	@Autowired
@@ -29,7 +29,7 @@ public class EmployeServiceImplTest {
 
 	
 	@Test
-	 void testAjouterEmploye() {
+	public void testAjouterEmploye() {
 	Employe employe = new Employe(NAME, LAST, EMAIL,true,Role.INGENIEUR);
 	 int i = iemployeservice.ajouterEmploye(employe);
 	 assertEquals(16, i);
@@ -37,7 +37,7 @@ public class EmployeServiceImplTest {
 	
 	
 	@Test
-	 void testAjouterEmploye2() {
+	public void testAjouterEmploye2() {
 		Employe employe = new Employe(NAME, LAST, EMAIL,true,Role.INGENIEUR);
 	 int i = iemployeservice.ajouterEmploye(employe);
 	 assertNotEquals(20, i);
@@ -45,43 +45,43 @@ public class EmployeServiceImplTest {
 	
 	
 	@Test
-	 void testajouterContrat() {
+	public void testajouterContrat() {
 	Contrat contrat = new Contrat(new Date() ,"svp",1500);
 	int i = iemployeservice.ajouterContrat(contrat);
 	assertEquals(1, i);
 	}
 	
 	@Test
-	  void testajouterContrat2() {
+	public void testajouterContrat2() {
 	Contrat contrat = new Contrat(new Date() ,"svp",1500);
 	int i = iemployeservice.ajouterContrat(contrat);
 	assertNotEquals(3, i);
 	}
 	
 	@Test
-	 void getEmployePrenomById() {
+	public void getEmployePrenomById() {
 		assertEquals("bernar", iemployeservice.getEmployePrenomById(15));
 	}
 	
 	
 	@Test
-	 void getEmployePrenomById2() {
+	public void getEmployePrenomById2() {
 		assertNotEquals("bernar2", iemployeservice.getEmployePrenomById(1));
 	}
 	
 	@Test
-	private void getNombreEmployeJPQL() {
+	public void getNombreEmployeJPQL() {
 		assertEquals(20, iemployeservice.getNombreEmployeJPQL());
 	}
 	
 	
 	@Test
-	private  void getNombreEmployeJPQL2() {
+	public void getNombreEmployeJPQL2() {
 		assertNotEquals(17, iemployeservice.getNombreEmployeJPQL());
 	}
 	
 	@Test
-	private void getAllEmployeNamesJPQL() {
+	public void getAllEmployeNamesJPQL() {
 	
 		assertEquals(Arrays.asList("alex", "alex").toArray(), iemployeservice.getAllEmployeNamesJPQL());
 	}
