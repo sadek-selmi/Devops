@@ -51,7 +51,7 @@ pipeline {
         stage('email'){
             	           steps {
 
-            mail bcc: '', body: 'Hello , this is a Pipeline DevOps', cc: '', from: '', replyTo: '', subject: 'DevOps Pipeline', to: 'selmisadekk@gmail.com'
+            mail bcc: '', body: 'Hello , this is a Pipeline DevOps', cc: '', from: '', replyTo: '', subject: 'DevOps Pipeline', to: 'selmii505@gmail.com'
     }}
     
 }}
